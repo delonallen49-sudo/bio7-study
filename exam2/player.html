@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bio 7 Lecture Player</title>
+<style>
+/* One lecture, built to sit beside OneNote: video first, a pop-out button, then the slide list to jump around */
+:root{--bg:#f4f7fb;--surface:#fff;--fg:#1b2533;--muted:#5d6b7c;--line:#d6dee8;--accent:#1f5fa8;--accent-fg:#fff}
+@media (prefers-color-scheme: dark){:root{--bg:#10151c;--surface:#18202a;--fg:#e3e9f0;--muted:#97a6b6;--line:#2a3542;--accent:#7fb2ec;--accent-fg:#0d1620;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.45 system-ui,"Segoe UI",sans-serif}
+main{max-width:980px;margin:0 auto;padding:12px 16px 40px;display:grid;gap:12px}
+h1{font-size:18px;margin:0}
+.sub{color:var(--muted);font-size:13px}
+video{width:100%;max-height:70vh;background:#000;border-radius:8px;display:block}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button,a.btn{font:600 14px system-ui,"Segoe UI",sans-serif;padding:8px 14px;border-radius:6px;border:1px solid var(--accent);background:var(--surface);color:var(--accent);cursor:pointer;text-decoration:none}
+button.primary{background:var(--accent);color:var(--accent-fg)}
+button:focus-visible,a.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.tip{font-size:13px;color:var(--muted)}
+.slides{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,210px),1fr));gap:10px}
+.slide{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px;cursor:pointer;text-align:left;font:inherit;color:inherit}
+.slide img{width:100%;display:block;border-radius:4px}
+.slide b{display:block;font-size:13px;margin-top:4px}
+.slide span{font-size:12px;color:var(--accent);font-variant-numeric:tabular-nums}
+.slide:hover,.slide:focus-visible{border-color:var(--accent);outline:none}
+</style>
+</head>
+<body>
+<main>
+  <div><h1 id="title">Lecture</h1><div class="sub" id="sub"></div></div>
+  <video id="v" controls preload="metadata" playsinline></video>
+  <div class="bar">
+    <button class="primary" id="pip">Pop out video (stays on top of OneNote)</button>
+    <a class="btn" href="./">All Exam 2 notes</a>
+    <span class="tip">Keys: ← → skip 5 s · Space play/pause</span>
+  </div>
+  <p class="tip">Pop out the video, then click back into OneNote: the floating video keeps playing on top while you write. Drag its corner to resize.</p>
+  <div class="slides" id="slides"></div>
+</main>
+<script>
+const Q = new URLSearchParams(location.search);
+const c = Q.get("v") || "26.1", start = +(Q.get("t") || 0);
+const v = document.getElementById("v");
+v.src = "video/" + c + ".mp4";
+document.getElementById("title").textContent = "Bio 7 lecture " + c;
+const mmss = t => Math.floor(t / 60) + ":" + String(Math.floor(t % 60)).padStart(2, "0");
+v.addEventListener("loadedmetadata", () => { if (start) v.currentTime = start; v.play().catch(() => {}); }, {once: true});
+document.getElementById("pip").onclick = async () => {
+  try {
+    if (document.pictureInPictureElement) await document.exitPictureInPicture();
+    else { await v.play().catch(() => {}); await v.requestPictureInPicture(); }
+  } catch (e) { document.getElementById("pip").textContent = "Pop-out not supported here: use the video's own menu"; }
+};
+document.addEventListener("keydown", e => {
+  const j = {ArrowLeft: -5, ArrowRight: 5}[e.key];
+  if (j) { v.currentTime += j; e.preventDefault(); }
+  if (e.key === " ") { v.paused ? v.play() : v.pause(); e.preventDefault(); }
+});
+fetch("slides.json").then(r => r.json()).then(all => {
+  const list = all[c] || [];
+  document.getElementById("sub").textContent = list.length ? list.length + " key slides: click one to jump there" : "";
+  document.getElementById("slides").innerHTML = list.map(s =>
+    `<button class="slide" data-t="${s.t}"><img src="${s.img}" alt=""><b>${s.title}</b><span>&#9654; ${mmss(s.t)}</span></button>`).join("");
+  document.querySelectorAll(".slide").forEach(b => b.onclick = () => { v.currentTime = +b.dataset.t; v.play(); });
+}).catch(() => {});
+</script>
+</body>
+</html>
