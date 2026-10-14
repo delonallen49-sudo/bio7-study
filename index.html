@@ -28,6 +28,12 @@ a.card:hover,a.card:focus-visible{border-color:var(--accent);outline:none}
 .kicker{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:600}
 .card h2{font:600 22px/1.25 var(--display);margin:0}
 .card p{margin:0;color:var(--muted)}
+.card.hot{border-color:var(--accent);border-width:2px}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.links a,.more a{display:inline-block;padding:7px 12px;border-radius:6px;border:1px solid var(--accent);color:var(--accent);text-decoration:none;font-weight:600}
+.links a:first-child{background:var(--accent);color:var(--surface)}
+.links a:focus-visible,.more a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.more{margin:0}
 .rules{border-top:1px solid var(--line);padding-top:20px;color:var(--muted);font-size:14px}
 .rules ul{margin:8px 0 0;padding-left:18px}
 u i,i u{text-decoration:underline}
@@ -40,10 +46,16 @@ u i,i u{text-decoration:underline}
     <p class="lede">Study apps for SMC Biology 7: notes, labeled figures, timed practice quizzes and drills. Your progress saves in your own browser only.</p>
   </header>
   <div class="cards">
+    <div class="card hot">
+      <span class="kicker">Exam 2 · Wed 10/14 · Ch 26, 27, 28</span>
+      <h2>Exam 2 notes: phylogeny, prokaryotes, protists</h2>
+      <p>GoodNotes-style notes for every concept: big idea, must-know, terms, what she stressed in lecture, lecture slides with captions and how-to-draw tips, compare tables, traps and essay prompts. Includes the <u><i>Plasmodium</i></u> life cycle (her extra-credit question).</p>
+      <div class="links"><a href="exam2/">Read online</a><a href="notes/Bio7_Exam2_Ch26-28_GoodNotes.pdf">PDF for GoodNotes</a></div>
+    </div>
     <a class="card" href="lab8.html">
       <span class="kicker">Lab 8 · next lab quiz</span>
       <h2>Plantae: Bryophytes</h2>
-      <p>Moss and liverwort (<u><i>Marchantia</i></u>) life cycles, labeled slide figures, 6 timed 10-question quizzes, essays.</p>
+      <p>Moss and liverwort (<u><i>Marchantia</i></u>) life cycles, labeled slide figures, 6 timed 10-question quizzes, essays. GoodNotes notes PDF linked below.</p>
     </a>
     <a class="card" href="fungi.html">
       <span class="kicker">Lab 7 + Ch 31 lecture</span>
@@ -51,6 +63,7 @@ u i,i u{text-decoration:underline}
       <p>Lab 7 slides and organisms, Ch 31 lecture slides, practice tests, drill and essay prompts.</p>
     </a>
   </div>
+  <p class="more"><a href="notes/Bio7_Lab8_Bryophytes_GoodNotes.pdf">Lab 8 GoodNotes notes (PDF)</a></p>
   <section class="rules">
     <strong>Lab write-up rules from the instructor's feedback</strong>
     <ul>
