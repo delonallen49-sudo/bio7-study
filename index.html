@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bio 7 Study Room</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&family=Public+Sans:wght@400;600&display=swap">
+<style>
+/* Layout: one narrow column, a lab-bench index card per guide */
+:root{
+  --bg:#f6f8f4; --surface:#ffffff; --fg:#1d261f; --muted:#5b6a5f; --line:#d5ddd4; --accent:#2f6b45;
+  --display:"Source Serif 4", Georgia, serif; --body:"Public Sans", system-ui, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#121713; --surface:#1a211c; --fg:#e4ebe5; --muted:#9aaa9e; --line:#2d3830; --accent:#7cc096; color-scheme:dark }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 var(--body)}
+main{max-width:720px;margin:0 auto;padding:48px 16px 64px;display:grid;gap:28px}
+h1{font:600 clamp(30px,6vw,42px)/1.1 var(--display);margin:0;text-wrap:balance}
+.lede{color:var(--muted);margin:8px 0 0;max-width:60ch}
+.cards{display:grid;gap:16px}
+a.card{display:grid;gap:6px;padding:20px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:inherit;text-decoration:none}
+a.card:hover,a.card:focus-visible{border-color:var(--accent);outline:none}
+.kicker{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.card h2{font:600 22px/1.25 var(--display);margin:0}
+.card p{margin:0;color:var(--muted)}
+.rules{border-top:1px solid var(--line);padding-top:20px;color:var(--muted);font-size:14px}
+.rules ul{margin:8px 0 0;padding-left:18px}
+u i,i u{text-decoration:underline}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Bio 7 Study Room</h1>
+    <p class="lede">Study apps for SMC Biology 7: notes, labeled figures, timed practice quizzes and drills. Your progress saves in your own browser only.</p>
+  </header>
+  <div class="cards">
+    <a class="card" href="lab8.html">
+      <span class="kicker">Lab 8 · next lab quiz</span>
+      <h2>Plantae: Bryophytes</h2>
+      <p>Moss and liverwort (<u><i>Marchantia</i></u>) life cycles, labeled slide figures, 6 timed 10-question quizzes, essays.</p>
+    </a>
+    <a class="card" href="fungi.html">
+      <span class="kicker">Lab 7 + Ch 31 lecture</span>
+      <h2>Kingdom Fungi</h2>
+      <p>Lab 7 slides and organisms, Ch 31 lecture slides, practice tests, drill and essay prompts.</p>
+    </a>
+  </div>
+  <section class="rules">
+    <strong>Lab write-up rules from the instructor's feedback</strong>
+    <ul>
+      <li>Italicize the genus of every organism (underline it when handwritten).</li>
+      <li>Always write the total magnification (for example 400X).</li>
+      <li>Label all parts, and answer every blank.</li>
+      <li>Typed answers in a color other than black.</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>
